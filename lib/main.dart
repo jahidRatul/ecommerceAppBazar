@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'itemCard.dart';
 
 void main() {
   runApp(MyApp());
@@ -55,25 +56,54 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
 //        itemCount: list == null ? 0 : list.length,
-        itemCount: 16,
+        itemCount: 12,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (context, i) {
           return Container(
             child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+//                    MaterialPageRoute(
+//                      builder: (context) => ItemCard(
+//                        unitPrice: list[i]["unit_price"],
+//                        imgUrl: 'http://siteonline.biz/androidec/' +
+//                            list[i]["thumbnail_img"],
+//                      ),
+//                    ),
+                    MaterialPageRoute(
+                      builder: (context) => ItemCard(list[i]),
+                    ),
+                  );
+                },
                 child: Card(
+                  elevation: 2,
                   child: Column(
                     children: [
-                      Image.network(
-                        'http://siteonline.biz/androidec/' +
-                            list[i]["thumbnail_img"],
-                        width: 200,
-                        height: 50,
-                        fit: BoxFit.fill,
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Image.network(
+                          'http://siteonline.biz/androidec/' +
+                              list[i]["thumbnail_img"],
+                          width: 200,
+                          height: 80,
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                      Text(list[i]["unit_price"]),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(list[i]["unit_price"]),
+                          Text(
+                            list[i]["unit_price"],
+                            style: TextStyle(
+                                decoration: TextDecoration.lineThrough),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
