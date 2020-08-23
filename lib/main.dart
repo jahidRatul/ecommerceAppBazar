@@ -67,15 +67,8 @@ class ItemList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-//                    MaterialPageRoute(
-//                      builder: (context) => ItemCard(
-//                        unitPrice: list[i]["unit_price"],
-//                        imgUrl: 'http://siteonline.biz/androidec/' +
-//                            list[i]["thumbnail_img"],
-//                      ),
-//                    ),
                     MaterialPageRoute(
-                      builder: (context) => ItemCard(list[i]),
+                      builder: (context) => ItemCard(list: list, index: i),
                     ),
                   );
                 },
